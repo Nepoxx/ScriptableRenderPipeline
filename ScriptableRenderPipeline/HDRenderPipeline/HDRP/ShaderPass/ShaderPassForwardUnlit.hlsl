@@ -57,7 +57,7 @@ float4 Frag(PackedVaryingsToPS packedInput) : SV_Target
 
         GetPropertiesDataDebug(_DebugViewMaterial, result, needLinearToSRGB);
         GetVaryingsDataDebug(_DebugViewMaterial, input, result, needLinearToSRGB);
-        GetBuiltinDataDebug(_DebugViewMaterial, builtinData, result, needLinearToSRGB);
+        GetBuiltinDataDebug(_DebugViewMaterial, builtinData, result, needLinearToSRGB, _DebugExposure);
         GetSurfaceDataDebug(_DebugViewMaterial, surfaceData, result, needLinearToSRGB);
         GetBSDFDataDebug(_DebugViewMaterial, bsdfData, result, needLinearToSRGB);
 

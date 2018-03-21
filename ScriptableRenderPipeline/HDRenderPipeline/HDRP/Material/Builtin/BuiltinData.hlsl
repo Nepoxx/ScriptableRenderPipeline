@@ -80,19 +80,14 @@ void DecodeDistortion(float4 inBuffer, out float2 distortion, out float distorti
     isValidSource = (inBuffer.z != 0.0);
 }
 
-void GetBuiltinDataDebug(uint paramId, BuiltinData builtinData, inout float3 result, inout bool needLinearToSRGB)
+void GetBuiltinDataDebug(uint paramId, BuiltinData builtinData, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
-    GetGeneratedBuiltinDataDebug(paramId, builtinData, result, needLinearToSRGB);
+    GetGeneratedBuiltinDataDebug(paramId, builtinData, result, needLinearToSRGB, debugExposure);
 
     switch (paramId)
     {
-    case DEBUGVIEW_BUILTIN_BUILTINDATA_BAKE_DIFFUSE_LIGHTING:
-        // TODO: require a remap
-        // TODO: we should not gamma correct, but easier to debug for now without correct high range value
-        result = builtinData.bakeDiffuseLighting; needLinearToSRGB = true;
-        break;
     case DEBUGVIEW_BUILTIN_BUILTINDATA_EMISSIVE_COLOR:
-        // emissiveColor is premultiply by emissive intensity
+        // emissiveColor is premultiplied by emissive intensity
         result = (builtinData.emissiveColor / builtinData.emissiveIntensity); needLinearToSRGB = true;
         break;
     case DEBUGVIEW_BUILTIN_BUILTINDATA_DEPTH_OFFSET:
@@ -104,9 +99,9 @@ void GetBuiltinDataDebug(uint paramId, BuiltinData builtinData, inout float3 res
     }
 }
 
-void GetLightTransportDataDebug(uint paramId, LightTransportData lightTransportData, inout float3 result, inout bool needLinearToSRGB)
+void GetLightTransportDataDebug(uint paramId, LightTransportData lightTransportData, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
-    GetGeneratedLightTransportDataDebug(paramId, lightTransportData, result, needLinearToSRGB);
+    GetGeneratedLightTransportDataDebug(paramId, lightTransportData, result, needLinearToSRGB, debugExposure);
 
     switch (paramId)
     {

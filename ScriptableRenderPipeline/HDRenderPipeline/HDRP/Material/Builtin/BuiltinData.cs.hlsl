@@ -55,7 +55,7 @@ struct LightTransportData
 //
 // Debug functions
 //
-void GetGeneratedBuiltinDataDebug(uint paramId, BuiltinData builtindata, inout float3 result, inout bool needLinearToSRGB)
+void GetGeneratedBuiltinDataDebug(uint paramId, BuiltinData builtindata, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
     switch (paramId)
     {
@@ -64,6 +64,7 @@ void GetGeneratedBuiltinDataDebug(uint paramId, BuiltinData builtindata, inout f
             break;
         case DEBUGVIEW_BUILTIN_BUILTINDATA_BAKE_DIFFUSE_LIGHTING:
             result = builtindata.bakeDiffuseLighting;
+            result *= exp2(debugExposure);
             needLinearToSRGB = true;
             break;
         case DEBUGVIEW_BUILTIN_BUILTINDATA_SHADOW_MASK_0:
@@ -103,7 +104,7 @@ void GetGeneratedBuiltinDataDebug(uint paramId, BuiltinData builtindata, inout f
 //
 // Debug functions
 //
-void GetGeneratedLightTransportDataDebug(uint paramId, LightTransportData lighttransportdata, inout float3 result, inout bool needLinearToSRGB)
+void GetGeneratedLightTransportDataDebug(uint paramId, LightTransportData lighttransportdata, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
     switch (paramId)
     {

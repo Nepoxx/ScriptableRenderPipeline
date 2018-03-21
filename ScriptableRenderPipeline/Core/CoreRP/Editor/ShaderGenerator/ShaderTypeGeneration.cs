@@ -145,13 +145,14 @@ namespace UnityEditor.Experimental.Rendering
 
         class DebugFieldInfo
         {
-            public DebugFieldInfo(string defineName, string fieldName, Type fieldType, bool isDirection, bool isSRGB)
+            public DebugFieldInfo(string defineName, string fieldName, Type fieldType, bool isDirection, bool isSRGB, bool needDebugExposure)
             {
                 this.defineName = defineName;
                 this.fieldName = fieldName;
                 this.fieldType = fieldType;
                 this.isDirection = isDirection;
                 this.isSRGB = isSRGB;
+                this.needDebugExposure = needDebugExposure;
             }
 
             public string defineName;
@@ -159,6 +160,7 @@ namespace UnityEditor.Experimental.Rendering
             public Type fieldType;
             public bool isDirection;
             public bool isSRGB;
+            public bool needDebugExposure;
         }
 
         void Error(string error)
@@ -456,7 +458,7 @@ namespace UnityEditor.Experimental.Rendering
             shaderText += "// Debug functions\n";
             shaderText += "//\n";
 
-            shaderText += "void GetGenerated" + type.Name + "Debug(uint paramId, " + type.Name + " " + lowerStructName + ", inout float3 result, inout bool needLinearToSRGB)\n";
+            shaderText += "void GetGenerated" + type.Name + "Debug(uint paramId, " + type.Name + " " + lowerStructName + ", inout float3 result, inout bool needLinearToSRGB, float debugExposure)\n";
             shaderText += "{\n";
             shaderText += "    switch (paramId)\n";
             shaderText += "    {\n";
@@ -505,6 +507,11 @@ namespace UnityEditor.Experimental.Rendering
                 else // This case left is suppose to be a complex structure. Either we don't support it or it is an enum. Consider it is an enum with GetIndexColor, user can override it if he want.
                 {
                     shaderText += "            result = GetIndexColor(" + lowerStructName + "." + debugField.fieldName + ");\n";
+                }
+
+                if(debugField.needDebugExposure)
+                {
+                    shaderText += "            result *= exp2(debugExposure);\n";
                 }
 
                 if (debugField.isSRGB)
@@ -590,6 +597,7 @@ namespace UnityEditor.Experimental.Rendering
 
                     bool isDirection = false;
                     bool sRGBDisplay = false;
+                    bool needDebugExposure = false;
 
                     // Check if the display name have been override by the users
                     if (Attribute.IsDefined(field, typeof(SurfaceDataAttributes)))
@@ -605,6 +613,7 @@ namespace UnityEditor.Experimental.Rendering
                         }
                         isDirection = propertyAttr[0].isDirection;
                         sRGBDisplay = propertyAttr[0].sRGBDisplay;
+                        needDebugExposure = propertyAttr[0].needDebugExposure;
                     }
 
                     string className = type.FullName.Substring(type.FullName.LastIndexOf((".")) + 1); // ClassName include nested class
@@ -617,7 +626,7 @@ namespace UnityEditor.Experimental.Rendering
                         string defineName = ("DEBUGVIEW_" + className + "_" + name).ToUpper();
                         m_Statics[defineName] = Convert.ToString(attr.paramDefinesStart + debugCounter++);
 
-                        m_DebugFields.Add(new DebugFieldInfo(defineName, field.Name, field.FieldType, isDirection, sRGBDisplay));
+                        m_DebugFields.Add(new DebugFieldInfo(defineName, field.Name, field.FieldType, isDirection, sRGBDisplay, needDebugExposure));
                     }
                 }
 

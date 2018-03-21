@@ -166,7 +166,9 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             DebugViewGbuffer debugGBuffer = (DebugViewGbuffer)materialDebugSettings.debugViewGBuffer;
             return  (debugLighting == DebugLightingMode.DiffuseLighting || debugLighting == DebugLightingMode.SpecularLighting) ||
                     (debugGBuffer == DebugViewGbuffer.BakeDiffuseLightingWithAlbedoPlusEmissive) ||
-                    (fullScreenDebugMode == FullScreenDebugMode.PreRefractionColorPyramid || fullScreenDebugMode == FullScreenDebugMode.FinalColorPyramid);
+                    (fullScreenDebugMode == FullScreenDebugMode.PreRefractionColorPyramid || fullScreenDebugMode == FullScreenDebugMode.FinalColorPyramid) ||
+                    // Not really a good test, we'd prefer to know if the current material debug needs exposure... but since it's generated we can't really know here. It means that color picker will give the wrong result for anything that does not need exposure.
+                    (materialDebugSettings.IsDebugDisplayEnabled());
         }
 
         void RegisterDisplayStatsDebug()

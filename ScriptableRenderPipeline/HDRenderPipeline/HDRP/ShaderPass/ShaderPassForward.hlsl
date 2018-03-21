@@ -119,9 +119,9 @@ void Frag(PackedVaryingsToPS packedInput,
 
         GetPropertiesDataDebug(_DebugViewMaterial, result, needLinearToSRGB);
         GetVaryingsDataDebug(_DebugViewMaterial, input, result, needLinearToSRGB);
-        GetBuiltinDataDebug(_DebugViewMaterial, builtinData, result, needLinearToSRGB);
-        GetSurfaceDataDebug(_DebugViewMaterial, surfaceData, result, needLinearToSRGB);
-        GetBSDFDataDebug(_DebugViewMaterial, bsdfData, result, needLinearToSRGB);
+        GetBuiltinDataDebug(_DebugViewMaterial, builtinData, result, needLinearToSRGB, _DebugExposure);
+        GetSurfaceDataDebug(_DebugViewMaterial, surfaceData, result, needLinearToSRGB, _DebugExposure);
+        GetBSDFDataDebug(_DebugViewMaterial, bsdfData, result, needLinearToSRGB, _DebugExposure);
 
         // TEMP!
         // For now, the final blit in the backbuffer performs an sRGB write

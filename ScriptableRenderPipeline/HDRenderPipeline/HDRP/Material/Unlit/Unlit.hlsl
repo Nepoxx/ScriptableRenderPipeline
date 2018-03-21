@@ -21,14 +21,14 @@ BSDFData ConvertSurfaceDataToBSDFData(SurfaceData data)
 // Debug method (use to display values)
 //-----------------------------------------------------------------------------
 
-void GetSurfaceDataDebug(uint paramId, SurfaceData surfaceData, inout float3 result, inout bool needLinearToSRGB)
+void GetSurfaceDataDebug(uint paramId, SurfaceData surfaceData, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
-    GetGeneratedSurfaceDataDebug(paramId, surfaceData, result, needLinearToSRGB);
+    GetGeneratedSurfaceDataDebug(paramId, surfaceData, result, needLinearToSRGB, debugExposure);
 }
 
-void GetBSDFDataDebug(uint paramId, BSDFData bsdfData, inout float3 result, inout bool needLinearToSRGB)
+void GetBSDFDataDebug(uint paramId, BSDFData bsdfData, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
-    GetGeneratedBSDFDataDebug(paramId, bsdfData, result, needLinearToSRGB);
+    GetGeneratedBSDFDataDebug(paramId, bsdfData, result, needLinearToSRGB, debugExposure);
 }
 
 //-----------------------------------------------------------------------------

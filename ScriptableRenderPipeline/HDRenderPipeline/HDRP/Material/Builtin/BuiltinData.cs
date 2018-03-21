@@ -21,7 +21,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             // We would prefer to split lighting and material information but for performance reasons,
             // those lighting information are fill
             // at the same time than material information.
-            [SurfaceDataAttributes("Bake Diffuse Lighting", false, true)]
+            [SurfaceDataAttributes("Bake Diffuse Lighting", false, true, true)]
             public Vector3 bakeDiffuseLighting; // This is the result of sampling lightmap/lightprobe/proxyvolume
 
             // Use for float instead of vector4 to ease the debug (no performance impact)

@@ -832,9 +832,9 @@ uint MaterialFeatureFlagsFromGBuffer(uint2 positionSS)
 // Debug method (use to display values)
 //-----------------------------------------------------------------------------
 
-void GetSurfaceDataDebug(uint paramId, SurfaceData surfaceData, inout float3 result, inout bool needLinearToSRGB)
+void GetSurfaceDataDebug(uint paramId, SurfaceData surfaceData, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
-    GetGeneratedSurfaceDataDebug(paramId, surfaceData, result, needLinearToSRGB);
+    GetGeneratedSurfaceDataDebug(paramId, surfaceData, result, needLinearToSRGB, debugExposure);
 
     // Overide debug value output to be more readable
     switch (paramId)
@@ -852,9 +852,9 @@ void GetSurfaceDataDebug(uint paramId, SurfaceData surfaceData, inout float3 res
     }
 }
 
-void GetBSDFDataDebug(uint paramId, BSDFData bsdfData, inout float3 result, inout bool needLinearToSRGB)
+void GetBSDFDataDebug(uint paramId, BSDFData bsdfData, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
-    GetGeneratedBSDFDataDebug(paramId, bsdfData, result, needLinearToSRGB);
+    GetGeneratedBSDFDataDebug(paramId, bsdfData, result, needLinearToSRGB, debugExposure);
 
     // Overide debug value output to be more readable
     switch (paramId)

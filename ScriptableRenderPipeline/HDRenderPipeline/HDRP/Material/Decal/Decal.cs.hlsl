@@ -57,7 +57,7 @@ float4x4 GetNormalToWorld(DecalData value)
 //
 // Debug functions
 //
-void GetGeneratedDecalSurfaceDataDebug(uint paramId, DecalSurfaceData decalsurfacedata, inout float3 result, inout bool needLinearToSRGB)
+void GetGeneratedDecalSurfaceDataDebug(uint paramId, DecalSurfaceData decalsurfacedata, inout float3 result, inout bool needLinearToSRGB, float debugExposure)
 {
     switch (paramId)
     {

@@ -32,22 +32,25 @@ namespace UnityEngine.Experimental.Rendering
         public string[] displayNames;
         public bool isDirection;
         public bool sRGBDisplay;
+        public bool needDebugExposure;
 
-        public SurfaceDataAttributes(string displayName = "", bool isDirection = false, bool sRGBDisplay = false)
+        public SurfaceDataAttributes(string displayName = "", bool isDirection = false, bool sRGBDisplay = false, bool needDebugExposure = false)
         {
             displayNames = new string[1];
             displayNames[0] = displayName;
             this.isDirection = isDirection;
             this.sRGBDisplay = sRGBDisplay;
+            this.needDebugExposure = needDebugExposure;
         }
 
         // We allow users to add several names for one field, so user can override the auto behavior and do something else with the same data
         // typical example is normal that you want to draw in view space or world space. So user can override view space case and do the transform.
-        public SurfaceDataAttributes(string[] displayName, bool isDirection = false, bool sRGBDisplay = false)
+        public SurfaceDataAttributes(string[] displayName, bool isDirection = false, bool sRGBDisplay = false, bool needDebugExposure = false)
         {
             displayNames = displayName;
             this.isDirection = isDirection;
             this.sRGBDisplay = sRGBDisplay;
+            this.needDebugExposure = needDebugExposure;
         }
     }
 }
