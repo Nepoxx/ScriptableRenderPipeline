@@ -211,11 +211,15 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             m_SkyRenderingContext.Cleanup();
         }
 
-        public bool IsSkyValid()
+        public bool IsLightingSkyValid()
         {
             return m_VisualSky.IsValid() || m_LightingOverrideSky.IsValid();
         }
 
+        public bool IsVisualSkyValid()
+        {
+            return m_VisualSky.IsValid();
+        }
 
         void BlitCubemap(CommandBuffer cmd, Cubemap source, RenderTexture dest)
         {
@@ -286,7 +290,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             m_UpdateRequired = false;
 
             SetGlobalSkyTexture(cmd);
-            if (IsSkyValid())
+            if (IsLightingSkyValid())
             {
                 cmd.SetGlobalInt(HDShaderIDs._EnvLightSkyEnabled, 1);
             }
