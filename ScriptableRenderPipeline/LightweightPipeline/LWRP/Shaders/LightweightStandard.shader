@@ -136,6 +136,7 @@ Shader "LightweightPipeline/Standard (Physically Based)"
             // -------------------------------------
             // Material Keywords
             #pragma shader_feature _ALPHATEST_ON
+            #pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
 
             //--------------------------------------
             // GPU Instancing
@@ -155,7 +156,6 @@ Shader "LightweightPipeline/Standard (Physically Based)"
 
             ZWrite On
             ColorMask 0
-            Cull[_Cull]
 
             HLSLPROGRAM
             // Required to compile gles 2.0 with standard srp library
@@ -169,6 +169,7 @@ Shader "LightweightPipeline/Standard (Physically Based)"
             // -------------------------------------
             // Material Keywords
             #pragma shader_feature _ALPHATEST_ON
+            #pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
 
             //--------------------------------------
             // GPU Instancing
